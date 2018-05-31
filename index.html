@@ -20,7 +20,7 @@
 
     <div id="form">
       <div class="inputs">
-        <input autocomplete="off" type="text" v-model="input" placeholder="Enter dank text">
+        <input id="dankInput" autocomplete="off" type="text"  placeholder="Enter dank text">
         <div>
           <input type="checkbox" id="numbersEffect" v-model="numbersEffect">
           <label for="numbersEffect">🔥 numbers effect</label>
@@ -49,6 +49,12 @@
         copyText: 'copy',
         copyTextClass: '',
       }
+    },
+    mounted() {
+      // as vue model is gay on android?
+      document.getElementById('dankInput').addEventListener('input', (e) => {
+        this.input = e.target.value;
+      })
     },
     methods: {
       copy() {
