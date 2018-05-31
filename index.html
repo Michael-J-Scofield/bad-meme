@@ -1,0 +1,102 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>dAnK T3Xt mAn</title>
+  <link rel="stylesheet" href="b1g.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.16/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.1/clipboard.min.js"></script>
+</head>
+<body>
+<div id="app">
+
+  <div class="container">
+    <header>
+      <h1 class="text-center">dAnK T3Xt mAn</h1>
+      <p class="greenText text-center">&#x3E; tHiS MeMe iS DeAd</p>
+    </header>
+
+    <div id="form">
+      <div class="inputs">
+        <input autocomplete="off" type="text" v-model="input" placeholder="Enter dank text">
+        <div>
+          <input type="checkbox" id="numbersEffect" v-model="numbersEffect">
+          <label for="numbersEffect">🔥 numbers effect</label>
+        </div>
+      </div>
+      <button :class="{ disabled: !input }" @click="copy" class="copyButton" :data-clipboard-text="spongiebobText">
+          <p :class="copyTextClass">{{copyText}}</p>
+      </button>
+
+      <transition name="slide-fade">
+        <p v-if="input"class="greenText">&#x3E; <span id="spongiebobText">{{spongiebobText}}</span></p>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<script>
+  new ClipboardJS('.copyButton');
+
+  let app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        input: '',
+        numbersEffect: false,
+        copyText: 'copy',
+        copyTextClass: '',
+      }
+    },
+    methods: {
+      copy() {
+        if (!this.input) {
+          return;
+        }
+
+        this.copyTextClass = 'out';
+        this.copyText = 'copied';
+
+        setTimeout( () => {
+          this.copyTextClass = '';
+        }, 300)
+
+        setTimeout( () => {
+          this.copyTextClass = 'out';
+          this.copyText = 'copy';
+        }, 600)
+
+        setTimeout( () => {
+          this.copyTextClass = '';
+        }, 750)
+      }
+    },
+    computed: {
+      spongiebobText() {
+        let result = '';
+        const charArray = this.input.split('');
+
+        for (let i = 0; i < charArray.length; i++) {
+          let char = charArray[i].toLowerCase();
+
+            if (char === 'e' && this.numbersEffect) {
+              result += '3';
+            } else if (char === 'i' && this.numbersEffect) {
+              result += '1';
+            } else if (char === 'a' && this.numbersEffect) {
+              result += '4';
+            } else if (i % 2 === 0) {
+              result += char.toLowerCase();
+            } else {
+              result += char.toUpperCase();
+            }
+        }
+        return result;
+      }
+    }
+  })
+</script>
+</body>
+</html>
