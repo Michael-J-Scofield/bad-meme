@@ -54,6 +54,7 @@ header p {
   width: 100%;
   outline: none;
   border: 1px solid grey;
+  height: 35px;
 }
 #form button {
   width: 100px;

@@ -33,6 +33,7 @@
       <transition name="slide-fade">
         <p v-if="input"class="greenText">&#x3E; <span id="spongiebobText">{{spongiebobText}}</span></p>
       </transition>
+
     </div>
   </div>
 </div>
@@ -45,6 +46,7 @@
     data() {
       return {
         input: '',
+        spongiebobText: '',
         numbersEffect: false,
         copyText: 'copy',
         copyTextClass: '',
@@ -73,8 +75,8 @@
         }, 750)
       }
     },
-    computed: {
-      spongiebobText() {
+    watch: {
+      input: function(newVal, oldVal) {
         let result = '';
         const charArray = this.input.split('');
 
@@ -93,7 +95,7 @@
               result += char.toUpperCase();
             }
         }
-        return result;
+        this.spongiebobText = result;
       }
     }
   })
